@@ -28,7 +28,7 @@ namespace venncuisine
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<VennCuisineContext>(options =>
                 {
-                    options.UseSqlServer(Configuration["Data:Server=tcp:venncuisine.database.windows.net,1433;Initial Catalog=venncuisine;Persist Security Info=False;User ID=michaelpassaglia;Password=Poop3rtin0!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"]);
+                    options.UseSqlServer(Configuration["DefaultConnection"]);
                 });
         }
 
@@ -55,7 +55,7 @@ namespace venncuisine
         public Startup()
         {
             var builder = new ConfigurationBuilder()
-                //.AddJsonFile("config.json")
+                .AddJsonFile("appSettings.json")
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
