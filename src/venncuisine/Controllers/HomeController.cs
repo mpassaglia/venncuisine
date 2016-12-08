@@ -11,19 +11,22 @@ namespace venncuisine.Controllers
 {
     public class HomeController : Controller
     {
-        private VennCuisineContext _db = new VennCuisineContext();
+        private VennCuisineContext _db;
         public HomeController(VennCuisineContext context)
         {
             _db = context;
-            Cuisines = new List<Data.Cuisines>();
+            //CuisineIngredients = new List<CuisineIngredients>();
+            NamedCuisineIngredients = new List<NamedCuisineIngredients>();
         }
         // GET: /<controller>/
         public IActionResult Index()
         {
-            Cuisines = _db.Cuisines.ToList();
+            //CuisineIngredients = _db.CuisineIngredients.ToList();
+            NamedCuisineIngredients = _db.NamedCuisineIngredients.ToList();
             return View();
         }
-        public List<Cuisines> Cuisines { get; set; }
+        //public List<CuisineIngredients> CuisineIngredients { get; set; }
+        public List<NamedCuisineIngredients> NamedCuisineIngredients { get; set; }
 
     }
 }

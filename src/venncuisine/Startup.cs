@@ -19,6 +19,8 @@ namespace venncuisine
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = @"Server=tcp:venncuisine.database.windows.net,1433;Initial Catalog=venncuisine;Persist Security Info=False;User ID=michaelpassaglia;Password=Poop3rtin0!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+
             services.AddMvc()
                 .AddJsonOptions(options =>
                 {
@@ -28,7 +30,7 @@ namespace venncuisine
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<VennCuisineContext>(options =>
                 {
-                    options.UseSqlServer(Configuration["DefaultConnection"]);
+                    options.UseSqlServer(connection);
                 });
         }
 
@@ -52,10 +54,11 @@ namespace venncuisine
         }
 
         public IConfigurationRoot Configuration { get; set; }
-        public Startup()
+        public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .AddJsonFile("appSettings.json")
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("/appSettings.json", optional: true, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
         }
