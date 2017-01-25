@@ -1,0 +1,12 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    Layout = "_Layout";
+}
+<div ng-controller="vcHome">
+    <button class="btn btn-default">hello!</button>
+    <select class="form-control"
+            ng-model="selectedIngredient"
+            ng-options="ing as ing.IngredientName for ing in cuisineIngredients"></select>
+</div>
