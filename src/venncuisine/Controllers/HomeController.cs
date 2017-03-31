@@ -16,23 +16,21 @@ namespace venncuisine.Controllers
         public HomeController(VennCuisineContext context)
         {
             _db = context;
-            //CuisineIngredients = new List<CuisineIngredients>();
-            NamedCuisineIngredients = _db.NamedCuisineIngredients.ToList();
         }
-        // GET: /<controller>/
         public IActionResult Index()
         {
-            //CuisineIngredients = _db.CuisineIngredients.ToList();
-            //NamedCuisineIngredients = 
             return View();
         }
-        //public List<CuisineIngredients> CuisineIngredients { get; set; }
-        public List<NamedCuisineIngredients> NamedCuisineIngredients { get; set; }
 
         [HttpGet]
         public string GetCuisineIngredients()
         {
-            return JsonConvert.SerializeObject(NamedCuisineIngredients.ToList());
+            return JsonConvert.SerializeObject(_db.NamedCuisineIngredients.ToList());
+        }
+        [HttpGet]
+        public string GetCuisines()
+        {
+            return JsonConvert.SerializeObject(_db.Cuisines.ToList());
         }
 
     }

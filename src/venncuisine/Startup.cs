@@ -19,7 +19,7 @@ namespace venncuisine
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            var connection = @"Server=tcp:venncuisine.database.windows.net,1433;Initial Catalog=venncuisine;Persist Security Info=False;User ID=michaelpassaglia;Password=Poop3rtin0!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            var connection = @"Server=tcp:vcuisine.database.windows.net,1433;Initial Catalog=venncuisine;Persist Security Info=False;User ID=michaelpassaglia;Password=Poop3rtin0!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
             services.AddMvc()
                 .AddJsonOptions(options =>
