@@ -8,6 +8,7 @@ using venncuisine.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
@@ -26,7 +27,11 @@ namespace venncuisine
                 {
                     options.SerializerSettings.ContractResolver =
                         new CamelCasePropertyNamesContractResolver();
-                });
+                })
+                .AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                }); ;
             services.AddEntityFrameworkSqlServer()
                 .AddDbContext<VennCuisineContext>(options =>
                 {

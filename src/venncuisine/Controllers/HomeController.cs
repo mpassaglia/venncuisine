@@ -33,5 +33,18 @@ namespace venncuisine.Controllers
             return JsonConvert.SerializeObject(_db.Cuisines.ToList());
         }
 
+        [HttpPost]
+        public IActionResult FindUnion([FromBody] Union obj)
+        {
+            var namedCI = _db.NamedCuisineIngredients.ToList();
+
+            var firstList = namedCI.Where(x => x.CuisineId == obj.first);
+            var secondList = namedCI.Where(x => x.CuisineId == obj.second);
+
+            var union = firstList.Join(secondList, c1 => c1.IngredientId, c2 => c2.IngredientId, (c1, c2) => c1).ToList();
+
+            return Json(new { union = union, left = firstList.Except(union).ToList(), right = secondList.Except(union).ToList() });
+        }
+
     }
 }

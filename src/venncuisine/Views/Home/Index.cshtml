@@ -5,11 +5,23 @@
     Layout = "_Layout";
 }
 <div ng-controller="vcHome">
-    <button class="btn btn-default">hello!</button>
-    <select class="form-control"
-            ng-model="selectedIngredient"
-            ng-options="ing as ing.IngredientName for ing in cuisineIngredients"></select>
-    <select class="form-control"
-            ng-model="selectedIngredient"
-            ng-options="cu as cu.CuisineName for cu in cuisines"></select>
+    <h1 class="h1">VennCuisine</h1>
+    <br />
+    <div class="row">
+        <div class="col-md-4 col-md-offset-2">
+            <select class="form-control"
+                    ng-model="cuisines.selectedCuisine_1"
+                    ng-options="cu1 as cu1.CuisineName for cu1 in cuisines.cuisineList"></select>
+        </div>
+        <div class="col-md-4">
+            <select class="form-control"
+                    ng-model="cuisines.selectedCuisine_2"
+                    ng-options="cu2 as cu2.CuisineName for cu2 in cuisines.cuisineList"></select>
+        </div>
+    </div>
+    <div class="row">
+        <button id="search" class="btn btn-primary"
+                ng-click="findUnion(cuisines.selectedCuisine_1, cuisines.selectedCuisine_2)"
+                ng-disabled="cuisines.selectedCuisine_1 === null || cuisines.selectedCuisine_2 === null">Go!</button>
+    </div>
 </div>

@@ -14,21 +14,35 @@ vc.service('vcShared', ['$http', function ($http) {
         },
         vcPost: function (baseUrl, path, prms) {
             return $http({
-                traditional: true,
                 method: 'POST',
                 url: baseUrl + '/' + path,
                 data: prms,
-                headers: { 'Content-Type': 'application/json' }
-            })
+                dataType: 'json',
+                contentType: 'application/x-www-form-urlencoded; charset=utf-8'
+            });
         }
     };
 }]);
-vc.factory('vcAPI', ['urls', 'vcShared', function (urls, vcShared) {
+vc.factory('vcAPI', ['urls', '$http', 'vcShared', function (urls, $http, vcShared) {
     var vcAPI = {};
 
     vcAPI.getCuisineIngredients = vcShared.vcGet(urls.home, 'GetCuisineIngredients');
 
     vcAPI.getCuisines = vcShared.vcGet(urls.home, 'GetCuisines');
 
+    //var params = new URLSearchParams()
+    vcAPI.union = function (obj) {
+        return vcShared.vcPost(urls.home, 'FindUnion', obj);
+    };
+
     return vcAPI;
-}])
+}]);
+
+//vc.config(function ($httpProvider) {
+//    $httpProvider.defaults.transformRequest = function (data) {
+//        if (data === undefined) {
+//            return data;
+//        }
+//        return $.param(data);
+//    }
+//});
